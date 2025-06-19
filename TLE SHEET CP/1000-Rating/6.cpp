@@ -73,7 +73,6 @@ int totalSubarrays(int n)
 
 /**
  * @brief Removes subarrays of length less than k using decrementing count.
- *        This matches the "mine type" approach.
  */
 int removeShortSubarrays(int total, int k, int len)
 {
@@ -87,8 +86,7 @@ int removeShortSubarrays(int total, int k, int len)
 }
 
 /**
- * @brief Solves one test case of the Ski Resort problem.
- *        Counts the number of ways to choose vacation dates such that
+ * @brief Counts the number of ways to choose vacation dates such that
  *        all temperatures are <= q and the vacation lasts at least k days.
  */
 void solve()
