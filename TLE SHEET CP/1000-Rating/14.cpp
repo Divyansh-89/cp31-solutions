@@ -117,57 +117,6 @@ void solve()
     }
     cout << endl;
 }
-void solve()
-{
-    int n;
-    cin >> n;
-    vi shoes(n);
-    for (int &shoe : shoes)
-        cin >> shoe;
-
-    // Count frequency of each shoe type
-    unordered_map<int, int> freq;
-    for (int shoe : shoes)
-        freq[shoe]++;
-
-    // If any shoe type appears only once, it's impossible
-    for (const auto &entry : freq)
-    {
-        if (entry.second == 1)
-        {
-            cout << -1 << endl;
-            return;
-        }
-    }
-
-    // Group indices by shoe type
-    unordered_map<int, vector<int>> type_indices;
-    for (int i = 0; i < n; ++i)
-    {
-        type_indices[shoes[i]].push_back(i);
-    }
-
-    // Prepare the answer: result[i] is the new position for shoe at i (1-based)
-    vi result(n);
-
-    // For each group, rotate the indices within the same type
-    for (const auto &entry : type_indices)
-    {
-        const vector<int> &indices = entry.second;
-        int sz = indices.size();
-        for (int i = 0; i < sz; ++i)
-        {
-            // Place each shoe at the next index in the group (circular)
-            result[indices[i]] = indices[(i + 1) % sz] + 1; // +1 for 1-based output
-        }
-    }
-
-    // Output the result
-    for (int pos : result)
-        cout << pos << " ";
-    cout << endl;
-}
-
 // =================== SOLUTION END ======================
 
 int32_t main()
