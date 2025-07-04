@@ -1,7 +1,7 @@
 /***************************************************************
- * Problem    : C. Double-ended Strings (Codeforces Round 710 (Div. 3))
+ * Problem    : B. Numbers Box (Codeforces Round 683 (Div. 2, by Meet IT))
  * Author     : Divyansh Rajput
- * Date       : 02 July 2025
+ * Date       : 04 July 2025
  ****************************************************************/
 
 #include <bits/stdc++.h>
@@ -14,6 +14,7 @@ using namespace std;
 #define PI 3.141592653589793238462
 #define int int64_t
 #define vi vector<int>
+#define vvi vector<vector<int>>
 #define all(x) (x).begin(), (x).end()
 #define endl '\n'
 #define yes cout << "YES" << "\n"
@@ -57,26 +58,32 @@ int power(int a, int b, int mod)
     return res;
 }
 // ================== SOLUTION START =====================
+
 void solve()
 {
-    string a, b;
-    cin >> a >> b;
-    int len1 = a.length();
-    int len2 = b.length();
-    int maxm = INT_MIN;
-    for (int i = 0; i < len1; i++)
+    int n, m;
+    cin >> n >> m;
+    vvi v(n, vi(m));
+    int sum = 0;
+    int neg_cnt = 0;
+    int minm = INT_MAX;
+    for (int i = 0; i < n; i++)
     {
-        for (int j = 0; j < len2; j++)
+        for (int j = 0; j < m; j++)
         {
-            int cnt = 0;
-            while (i + cnt < len1 && j + cnt < len2 && a[i + cnt] == b[j + cnt])
-            {
-                cnt++;
-            }
-            maxm = max(maxm, cnt);
+            cin >> v[i][j];
+            if (v[i][j] < 0)
+                neg_cnt++;
+            minm = min(minm, abs(v[i][j]));
+            sum += abs(v[i][j]);
         }
     }
-    cout << len1 + len2 - 2 * (maxm) << endl;
+    if (neg_cnt % 2)
+    {
+        cout << sum - 2 * minm << endl;
+    }
+    else
+        cout << sum << endl;
 }
 // =================== SOLUTION END ======================
 int32_t main()

@@ -1,7 +1,7 @@
 /***************************************************************
- * Problem    : C. Double-ended Strings (Codeforces Round 710 (Div. 3))
+ * Problem    : A. Add and Divide Codeforces Round 701 (Div. 2)
  * Author     : Divyansh Rajput
- * Date       : 02 July 2025
+ * Date       : 03 July 2025
  ****************************************************************/
 
 #include <bits/stdc++.h>
@@ -59,24 +59,32 @@ int power(int a, int b, int mod)
 // ================== SOLUTION START =====================
 void solve()
 {
-    string a, b;
+    int a, b;
     cin >> a >> b;
-    int len1 = a.length();
-    int len2 = b.length();
-    int maxm = INT_MIN;
-    for (int i = 0; i < len1; i++)
+    if (a == b)
+        cout << 2 << endl;
+    else if (a < b)
+        cout << 1 << endl;
+    else
     {
-        for (int j = 0; j < len2; j++)
+        int ans = INT_MAX;
+        for (int i = 0; i < 31; i++)
         {
-            int cnt = 0;
-            while (i + cnt < len1 && j + cnt < len2 && a[i + cnt] == b[j + cnt])
+            int newA = a;
+            int operations = 0;
+            int ops = i;
+            int b_ = b + ops;
+            if (b_ == 1)
+                continue;
+            while (newA > 0)
             {
-                cnt++;
+                newA /= b_;
+                operations++;
             }
-            maxm = max(maxm, cnt);
+            ans = min(ans, operations + ops);
         }
+        cout << ans << endl;
     }
-    cout << len1 + len2 - 2 * (maxm) << endl;
 }
 // =================== SOLUTION END ======================
 int32_t main()

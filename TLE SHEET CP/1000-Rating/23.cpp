@@ -1,7 +1,7 @@
 /***************************************************************
- * Problem    : C. Double-ended Strings (Codeforces Round 710 (Div. 3))
+ * Problem    : B. Different Divisors (Codeforces Round 696 (Div. 2))
  * Author     : Divyansh Rajput
- * Date       : 02 July 2025
+ * Date       : 04 July 2025
  ****************************************************************/
 
 #include <bits/stdc++.h>
@@ -57,26 +57,22 @@ int power(int a, int b, int mod)
     return res;
 }
 // ================== SOLUTION START =====================
+int nex_prime(int i)
+{
+    while (i)
+    {
+        if (isPrime[i])
+            return i;
+        i++;
+    }
+}
 void solve()
 {
-    string a, b;
-    cin >> a >> b;
-    int len1 = a.length();
-    int len2 = b.length();
-    int maxm = INT_MIN;
-    for (int i = 0; i < len1; i++)
-    {
-        for (int j = 0; j < len2; j++)
-        {
-            int cnt = 0;
-            while (i + cnt < len1 && j + cnt < len2 && a[i + cnt] == b[j + cnt])
-            {
-                cnt++;
-            }
-            maxm = max(maxm, cnt);
-        }
-    }
-    cout << len1 + len2 - 2 * (maxm) << endl;
+    int d;
+    cin >> d;
+    int p = nex_prime(d + 1);
+    int q = nex_prime(d + p);
+    cout << min(p * p * p, p * q) << endl;
 }
 // =================== SOLUTION END ======================
 int32_t main()
@@ -87,6 +83,7 @@ int32_t main()
 
     int t = 1;
     cin >> t;
+    sieve();
     while (t--)
     {
         solve();
